@@ -20,7 +20,7 @@ function AddTopping( { createTopping, onChange, topping }: PropTypes ){
                         aria-label="add topping" 
                         placeholder="Topping name"  
                         type="text" value={topping ? topping : ''} 
-                        onChange={(e) => onChange(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))} 
+                        onChange={(e) => onChange(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).trim())} 
                     />
                     <Button style={{color: 'red', marginLeft: '2rem'}} label={'Add'}/>
                 </span>
