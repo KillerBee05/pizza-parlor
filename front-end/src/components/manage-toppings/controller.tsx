@@ -5,6 +5,7 @@ import {Topping} from './types';
 interface StateType {
     allToppings: Topping[];
     isUpdating: boolean;
+    loading: boolean;
     selectedTopping?: Topping;
     topping: string;
 }
@@ -12,6 +13,7 @@ interface StateType {
 const INITIAL_STATE: StateType = {
     allToppings: [],
     isUpdating: false,
+    loading: false,
     selectedTopping: undefined,
     topping: '',
 };
@@ -19,13 +21,22 @@ const INITIAL_STATE: StateType = {
 function Controller(){
     const [state, setState] = useState<StateType>(INITIAL_STATE);
 
-    const { allToppings, isUpdating, selectedTopping, topping } = state;
+    const { allToppings, isUpdating, loading, selectedTopping, topping } = state;
 
 
     const fetchToppings = async () => {
+        setState({...state, loading: true})
         await fetch('https://pizza-parlor.onrender.com/topping')
         .then( response => response.json())
-        .then( data => setState({...state, allToppings: data, isUpdating: false, topping:''}))
+        .then( data => {
+            setState({
+                ...state, 
+                allToppings: data,
+                isUpdating: false,
+                loading: false,
+                topping:''
+            })
+        })
     }
 
     const createTopping = async () => {
@@ -113,7 +124,8 @@ function Controller(){
                 deleteTopping={deleteTopping} 
                 editTopping={editTopping}
                 getSelectedTopping={getSelectedTopping}
-                isUpdating={isUpdating} 
+                isUpdating={isUpdating}
+                loading={loading}
                 onChange={onChange}
                 topping={topping} 
             />

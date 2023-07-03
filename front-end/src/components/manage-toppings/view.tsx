@@ -12,6 +12,7 @@ export interface PropTypes {
     editTopping: () => void;
     getSelectedTopping: (selectedTopping: Topping) => void;
     isUpdating: boolean;
+    loading: boolean;
     onChange: (topping: string) => void;
     topping: string;
 }
@@ -24,18 +25,21 @@ function View({
     editTopping, 
     getSelectedTopping, 
     isUpdating, 
+    loading,
     onChange, 
     topping
 }: PropTypes ){
     return(
         <div data-testid='topping-list'>
             {!isUpdating ? ( 
-                <AddTopping createTopping={createTopping} onChange={onChange} topping={topping}/> 
+                <AddTopping createTopping={createTopping} onChange={onChange} topping={topping} /> 
             ): (
                 <EditTopping cancel={cancel} editTopping={editTopping} onChange={onChange} topping={topping} /> 
             )}
             
-            { allToppings.length === 0 ? (
+            { loading ? (
+                 <p className="inline"> Loading toppings... </p>
+            ): allToppings.length === 0 ? (
                 <p className="inline"> No Toppings right now. Lets start shopping! </p>
             ):(
                 allToppings.map((topping, i) => (

@@ -14,6 +14,7 @@ export interface PropTypes {
     editPizza: () => void;
     getSelectedPizza: (selectedPizza: Pizza) => void;
     isUpdating: boolean;
+    loading: boolean;
     onChange: (topping: string) => void;
     pizza: string;
     selectedToppings: string[];
@@ -28,7 +29,8 @@ function View({
     editPizza, 
     deletePizza, 
     getSelectedPizza, 
-    isUpdating, 
+    isUpdating,
+    loading,
     onChange,
     pizza, 
     selectedToppings
@@ -55,7 +57,9 @@ function View({
                     selectedToppings={selectedToppings} 
                 /> 
             )}
-            { allPizzas.length === 0 ? (
+            { loading ? (
+                <p className="inline"> Loading pizza and toppings... </p>
+            ) : allPizzas.length === 0 ? (
                 <p className="inline"> No pizza right now. Lets start cookin'! </p>
             ):(
                 allPizzas.map((pizza, i) => (

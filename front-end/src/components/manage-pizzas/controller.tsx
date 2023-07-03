@@ -6,6 +6,7 @@ interface StateType {
     allPizzas: Pizza[];
     allToppings: Topping[];
     isUpdating: boolean;
+    loading: boolean;
     selectedPizza?: Topping;
     selectedToppings: string[];
     pizza: string;
@@ -15,6 +16,7 @@ const INITIAL_STATE: StateType = {
     allPizzas: [],
     allToppings: [],
     isUpdating: false,
+    loading: false,
     selectedPizza: undefined,
     selectedToppings: [],
     pizza: '',
@@ -26,13 +28,15 @@ function Controller(){
     const { 
         allPizzas, 
         allToppings, 
-        isUpdating, 
+        isUpdating,
+        loading,
         pizza, 
         selectedPizza, 
         selectedToppings 
     } = state;
 
     const fetchPizzas = async () => {
+        setState({...state, loading: true})
         const pizzaData = await fetch('https://pizza-parlor.onrender.com/pizza')
         .then( response => response.json())
         .then( data => data)
@@ -45,6 +49,7 @@ function Controller(){
             ...state,  
             allPizzas: pizzaData, 
             allToppings: toppingData, 
+            loading: false,
             pizza: '', 
             selectedToppings: []
         })
@@ -80,31 +85,25 @@ function Controller(){
     }
 
     const editPizza = async () => {
-        let isDupe;
-        if(pizza !== '' && selectedToppings.length > 0){
-            for(const value of allToppings){
-                if(value.name === pizza) isDupe = true
-            }
+        if(pizza !== '' && selectedToppings.length > 0 ){
 
             const updatedPizza = {
                 ...selectedPizza, _id:`${selectedPizza?._id}`, 
                 name: pizza, toppings: 
                 selectedToppings
             }
+        
+            await fetch('https://pizza-parlor.onrender.com/pizza', {
+            method:'PUT',
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(updatedPizza)
+            })
+            .then((response) => response.json())
+            .then(() => fetchPizzas())
+            .catch((error) => console.error(error)); 
             
-            if(isDupe) alert('This pizza already exists!') 
-            else {
-                await fetch('https://pizza-parlor.onrender.com/pizza', {
-                method:'PUT',
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body: JSON.stringify(updatedPizza)
-                })
-                .then((response) => response.json())
-                .then(() => fetchPizzas())
-                .catch((error) => console.error(error)); 
-            };
         } 
         else alert('Please enter pizza and toppings')
     }
@@ -167,6 +166,7 @@ function Controller(){
                 editPizza={editPizza}
                 getSelectedPizza={getSelectedPizza}
                 isUpdating={isUpdating} 
+                loading={loading}
                 onChange={onChange}
                 pizza={pizza} 
                 selectedToppings={selectedToppings}
