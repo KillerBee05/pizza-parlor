@@ -33,11 +33,11 @@ function Controller(){
     } = state;
 
     const fetchPizzas = async () => {
-        const pizzaData = await fetch('http://localhost:5000/pizza')
+        const pizzaData = await fetch('https://pizza-parlor.onrender.com/pizza')
         .then( response => response.json())
         .then( data => data)
         
-        const toppingData = await fetch('http://localhost:5000/topping')
+        const toppingData = await fetch('https://pizza-parlor.onrender.com/topping')
         .then( response => response.json())
         .then( data => data)
 
@@ -64,7 +64,7 @@ function Controller(){
 
             if(isDupe) alert('This pizza already exists!') 
             else {
-                await fetch('http://localhost:5000/pizza', {
+                await fetch('https://pizza-parlor.onrender.com/pizza', {
                     method:'POST',
                     headers:{
                         "Content-Type":"application/json"
@@ -94,7 +94,7 @@ function Controller(){
             
             if(isDupe) alert('This pizza already exists!') 
             else {
-                await fetch('http://localhost:5000/pizza', {
+                await fetch('https://pizza-parlor.onrender.com/pizza', {
                 method:'PUT',
                 headers:{
                     "Content-Type":"application/json"
@@ -110,7 +110,7 @@ function Controller(){
     }
 
     const deletePizza = async (_id: string) => {
-        await fetch(`http://localhost:5000/pizza`, {
+        await fetch(`https://pizza-parlor.onrender.com/pizza`, {
             method:'DELETE',
             headers:{
                 "Content-Type":"application/json"

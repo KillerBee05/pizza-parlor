@@ -23,7 +23,7 @@ function Controller(){
 
 
     const fetchToppings = async () => {
-        await fetch('http://localhost:5000/topping')
+        await fetch('https://pizza-parlor.onrender.com/topping')
         .then( response => response.json())
         .then( data => setState({...state, allToppings: data, isUpdating: false, topping:''}))
     }
@@ -36,7 +36,7 @@ function Controller(){
             }
             if(isDupe) alert('This topping already exists!') 
             else {
-                await fetch('http://localhost:5000/topping', {
+                await fetch('https://pizza-parlor.onrender.com/topping', {
                     method:'POST',
                     headers:{
                         "Content-Type":"application/json"
@@ -60,7 +60,7 @@ function Controller(){
             const updatedTopping = {...selectedTopping, _id:`${selectedTopping?._id}`, name: topping}
             if(isDupe) alert('This topping already exists!') 
             else {
-                await fetch('http://localhost:5000/topping', {
+                await fetch('https://pizza-parlor.onrender.com/topping', {
                 method:'PUT',
                 headers:{
                     "Content-Type":"application/json"
@@ -76,7 +76,7 @@ function Controller(){
     }
 
     const deleteTopping = async (_id: string) => {
-        await fetch(`http://localhost:5000/topping`, {
+        await fetch(`https://pizza-parlor.onrender.com/topping`, {
             method:'DELETE',
             headers:{
                 "Content-Type":"application/json"
