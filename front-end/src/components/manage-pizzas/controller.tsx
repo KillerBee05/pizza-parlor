@@ -141,7 +141,8 @@ function Controller(){
             ...state, 
             isUpdating: true, 
             selectedPizza, 
-            pizza: selectedPizza.name
+            pizza: selectedPizza.name,
+            selectedToppings: []
         });
     }
 

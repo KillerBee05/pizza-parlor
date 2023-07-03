@@ -38,7 +38,7 @@ function AddPizza({
                         placeholder="Pizza name" 
                         type="text" 
                         value={pizza ? pizza : ''} 
-                        onChange={(e) => onChange(e.target.value)} 
+                        onChange={(e) => onChange(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))} 
                     />
                     <select aria-label="select topping" onChange={(e) => addTopping(e.target.value)} multiple>
                         <option disabled>Add toppings</option>

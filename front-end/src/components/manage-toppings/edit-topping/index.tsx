@@ -23,7 +23,7 @@ function EditTopping( { cancel, editTopping, onChange, topping }: PropTypes ){
                         aria-label="edit topping" 
                         placeholder="Topping name"  
                         type="text" value={topping ? topping : ''} 
-                        onChange={(e) => onChange(e.target.value)}
+                        onChange={(e) => onChange(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))}
                     />
                     <Button label={'Save'}  style={{color: 'red', marginLeft: '1rem'}} />
                     <Button label={'Cancel'} onClick={cancel} style={{color: 'red', marginLeft: '1rem'}} />

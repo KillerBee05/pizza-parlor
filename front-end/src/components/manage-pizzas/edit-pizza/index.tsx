@@ -34,13 +34,13 @@ function EditPizza({
     return(
         <div data-testid='topping-list'> 
             <form onSubmit={handleSubmit}>
-            <div className='inline'> {selectedToppings && `Toppings selected: ${selectedToppings} `} </div>
+            <div className='inline'> {selectedToppings && `Toppings selected: ${selectedToppings.join(", ")} `} </div>
                 <span className='inline'>
                     <input 
                         aria-label="edit pizza"
                         placeholder="Pizza name" 
                         type="text" value={pizza ? pizza : ''} 
-                        onChange={(e) => onChange(e.target.value)}
+                        onChange={(e) => onChange(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))}
                     />
                     <select aria-label="edit topping" onChange={(e) => addTopping(e.target.value)} multiple>
                         <option>Add toppings</option>
