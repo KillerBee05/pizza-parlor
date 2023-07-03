@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const { getPizza, savePizza, updatePizza, deletePizza } = require("../controllers/manage-pizzas");
+const router = (0, express_1.Router)();
+router.get('/pizza', getPizza);
+router.post('/pizza', savePizza);
+router.put('/pizza', updatePizza);
+router.delete('/pizza', deletePizza);
+module.exports = router;
