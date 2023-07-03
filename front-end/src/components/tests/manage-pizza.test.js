@@ -4,7 +4,7 @@ import Controller from '../manage-pizzas';
 
 beforeEach(() => {
   jest.spyOn(global, 'fetch').mockImplementation((url) => {
-    if (url === 'http://localhost:5000/pizza') {
+    if (url === 'https://pizza-parlor.onrender.com/pizza') {
       return Promise.resolve({
         json: () =>
           Promise.resolve([
@@ -12,7 +12,7 @@ beforeEach(() => {
             { _id: '2', name: 'Pizza 2', toppings: ['Topping 3', 'Topping 4'] },
           ]),
       });
-    } else if (url === 'http://localhost:5000/topping') {
+    } else if (url === 'https://pizza-parlor.onrender.com/topping') {
       return Promise.resolve({
         json: () =>
           Promise.resolve([

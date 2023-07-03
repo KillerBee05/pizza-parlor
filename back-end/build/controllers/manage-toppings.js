@@ -40,6 +40,7 @@ module.exports.updateTopping = (req, res) => __awaiter(void 0, void 0, void 0, f
     const { _id, name } = req.body;
     if (_id && name) {
         try {
+            // Looking for dupes
             const duplicateTopping = yield Topping.findOne({ _id: { $ne: _id }, name: name });
             if (duplicateTopping)
                 return res.status(400).json('Duplicate topping!');

@@ -17,3 +17,4 @@ test('calls the onClick function when clicked', () => {
   fireEvent.click(buttonElement);
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
+

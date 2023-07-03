@@ -4,7 +4,7 @@ import Controller from '../manage-toppings';
 
 beforeEach(() => {
   jest.spyOn(global, 'fetch').mockImplementation((url) => {
-    if (url === 'http://localhost:5000/topping') {
+    if (url === 'https://pizza-parlor.onrender.com/topping') {
       return Promise.resolve({
         json: () =>
           Promise.resolve([
