@@ -38,9 +38,14 @@ function AddPizza({
                         placeholder="Pizza name" 
                         type="text" 
                         value={pizza ? pizza : ''} 
-                        onChange={(e) => onChange(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).trim())} 
+                        onChange={(e) => onChange(e.target.value.charAt(0).toUpperCase().trim() + e.target.value.slice(1))} 
                     />
-                    <select aria-label="select topping" onChange={(e) => addTopping(e.target.value)} multiple>
+                    <select 
+                        aria-label="select topping" 
+                        value={selectedToppings ? selectedToppings : ''}  
+                        onChange={(e) => addTopping(e.target.value)} 
+                        multiple
+                    >
                         <option disabled>Add toppings</option>
                         {availableToppings.map((topping, i) => {
                             return <option key={i} >

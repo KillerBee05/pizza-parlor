@@ -42,7 +42,12 @@ function EditPizza({
                         type="text" value={pizza ? pizza : ''} 
                         onChange={(e) => onChange(e.target.value.charAt(0).toUpperCase().trim() + e.target.value.slice(1))}
                     />
-                    <select aria-label="edit topping" onChange={(e) => addTopping(e.target.value)} multiple>
+                    <select 
+                        aria-label="edit topping" 
+                        value={selectedToppings ? selectedToppings : ''}  
+                        onChange={(e) => addTopping(e.target.value)} 
+                        multiple
+                    >
                         <option>Add toppings</option>
                         {availableToppings.map((topping, i) => {
                             return <option key={i} >

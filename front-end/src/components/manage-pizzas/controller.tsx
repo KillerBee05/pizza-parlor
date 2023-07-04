@@ -126,6 +126,7 @@ function Controller(){
         // eslint-disable-next-line 
     },[])
 
+    
     const onChange = (pizza: string) => setState({...state, pizza });
     const addTopping = (topping: string) => {
         let toppings = selectedToppings;
@@ -135,6 +136,7 @@ function Controller(){
             setState({...state, selectedToppings: toppings })
         }
     }
+    
     const getSelectedPizza = (selectedPizza: Topping) => {
         setState({
             ...state, 
