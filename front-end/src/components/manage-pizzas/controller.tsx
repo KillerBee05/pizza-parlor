@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import View from './view';
-import {Topping, Pizza} from './types';
+import {Topping, Pizza} from '../../types';
 
 interface StateType {
     allPizzas: Pizza[];

@@ -1,6 +1,6 @@
 import React from "react";
 import Button from '../../button'
-import {Topping} from '../types';
+import {Topping} from '../../../types';
 
 export interface PropTypes {
     addTopping: (topping: string) => void;

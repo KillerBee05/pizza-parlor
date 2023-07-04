@@ -2,7 +2,7 @@ import React from "react";
 import Button from '../button'
 import AddPizza from './add-pizza'
 import EditPizza from './edit-pizza'
-import {Topping, Pizza} from './types';
+import {Topping, Pizza} from '../../types';
 
 export interface PropTypes {
     allPizzas: Pizza[];
@@ -63,9 +63,11 @@ function View({
                 <p className="inline"> No pizza right now. Lets start cookin'! </p>
             ):(
                 allPizzas.map((pizza, i) => (
-                    <span className="toppings" data-testid={`topping-${pizza._id}`} key={i}> 
+                    <span className="toppings" key={i}> 
                         {pizza.name} ({pizza.toppings.join(", ")})
                         <Button 
+                            aria-label={`edit-${pizza._id}`}
+                            data-testid="edit-button"
                             label={'Edit'} 
                             onClick={() => getSelectedPizza({_id: pizza._id, name: pizza.name, toppings: pizza.toppings})} 
                             style={{color: 'blue', marginLeft: '1rem'}} 

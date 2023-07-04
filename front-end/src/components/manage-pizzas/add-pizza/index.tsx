@@ -1,6 +1,6 @@
 import React from "react";
 import Button from '../../button';
-import {Topping} from '../types';
+import {Topping} from '../../../types';
 
 export interface PropTypes {
     allToppings: Topping[];
@@ -29,12 +29,13 @@ function AddPizza({
         createPizza()
     }
     return(
-        <div data-testid='topping-list'> 
+        <div data-testid='pizza-list'> 
             <form onSubmit={handleSubmit}>
             <div className='inline'> {selectedToppings && `Toppings selected: ${selectedToppings.join(", ")} `} </div>
                 <span className='inline'>
                     <input 
-                        aria-label="add pizza" 
+                        aria-label="add pizza"
+                        data-testid="pizza-input"
                         placeholder="Pizza name" 
                         type="text" 
                         value={pizza ? pizza : ''} 

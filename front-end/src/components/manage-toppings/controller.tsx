@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import View from './view';
-import {Topping} from './types';
+import {Topping} from '../../types';
 
 interface StateType {
     allToppings: Topping[];

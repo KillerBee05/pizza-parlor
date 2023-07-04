@@ -2,7 +2,7 @@ import React from "react";
 import Button from '../button'
 import AddTopping from './add-topping'
 import EditTopping from './edit-topping'
-import {Topping} from './types';
+import {Topping} from '../../types';
 
 export interface PropTypes {
     allToppings: Topping[]
