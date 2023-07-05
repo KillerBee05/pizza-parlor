@@ -63,7 +63,7 @@ function View({
                 <p className="inline"> No pizza right now. Lets start cookin'! </p>
             ):(
                 allPizzas.map((pizza, i) => (
-                    <span className="toppings" key={i}> 
+                    <span className="toppings" key={i} data-testid={`pizza-${i}`}> 
                         {pizza.name} ({pizza.toppings.join(", ")})
                         <Button 
                             aria-label={`edit-${pizza._id}`}

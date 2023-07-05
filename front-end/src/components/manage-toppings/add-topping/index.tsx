@@ -19,6 +19,7 @@ function AddTopping( { createTopping, onChange, topping }: PropTypes ){
                     <input 
                         aria-label="add topping" 
                         placeholder="Topping name"  
+                        data-testid="topping-input"
                         type="text" value={topping ? topping : ''} 
                         onChange={(e) => onChange(e.target.value.charAt(0).toUpperCase().trim() + e.target.value.slice(1))} 
                     />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, act } from '@testing-library/react';
-import Controller from '../manage-toppings';
+import Controller from '../../manage-toppings';
 
 beforeEach(() => {
   jest.spyOn(global, 'fetch').mockImplementation((url) => {

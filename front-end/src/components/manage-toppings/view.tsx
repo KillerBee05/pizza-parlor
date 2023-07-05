@@ -30,7 +30,7 @@ function View({
     topping
 }: PropTypes ){
     return(
-        <div data-testid='topping-list'>
+        <div>
             {!isUpdating ? ( 
                 <AddTopping createTopping={createTopping} onChange={onChange} topping={topping} /> 
             ): (
@@ -43,14 +43,18 @@ function View({
                 <p className="inline"> No Toppings right now. Lets start shopping! </p>
             ):(
                 allToppings.map((topping, i) => (
-                    <span className="toppings" data-testid={`topping-${topping._id}`} key={i}> 
+                    <span className="toppings" data-testid={`topping-${i}`} key={i} > 
                         {topping.name} 
                         <Button 
+                            aria-label='edit-topping'
+                            data-testid={`edit-button-${i}`}
                             label={'Edit'} 
                             onClick={() => getSelectedTopping({_id: topping._id, name: topping.name})} 
                             style={{color: 'red', marginLeft: '1rem'}} 
                         />
                         <Button 
+                            aria-label='delete-topping'
+                            data-testid={`delete-button-${i}`}
                             label={'X'} 
                             onClick={() => deleteTopping(topping._id)} 
                             style={{color: 'red', marginLeft: '1rem'}} 

@@ -1,6 +1,8 @@
 import React from 'react';
-import { render, act } from '@testing-library/react';
-import Controller from '../manage-pizzas';
+import { render, act, waitFor, fireEvent, screen } from '@testing-library/react';
+import Controller from '../../manage-pizzas';
+import fetchMock from "jest-fetch-mock";
+
 
 beforeEach(() => {
   jest.spyOn(global, 'fetch').mockImplementation((url) => {
@@ -58,7 +60,31 @@ test('renders all toppings fetched from the API', async () => {
   expect(container.textContent).toContain('Topping 4');
 });
 
+test('fetches pizzas when the component mounts', async () => {
+  render(<Controller />);
+  await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
+  expect(global.fetch).toHaveBeenCalledWith('https://pizza-parlor.onrender.com/pizza');
+  expect(global.fetch).toHaveBeenCalledWith('https://pizza-parlor.onrender.com/topping');
+});
 
+test('creates a new pizza when name and toppings are provided', async () => {
+  render(<Controller />);
+  const pizzaName = 'New Pizza';
+  const toppings = ['Topping 1', 'Topping 2'];
+  const createButton = screen.getByText('Add');
+  
+  fireEvent.change(screen.getByTestId('pizza-input'), { target: { value: pizzaName } });
+  const toppingsSelect = screen.getByLabelText('select topping');
+  toppings.forEach((topping) => {
+    fireEvent.change(toppingsSelect, { target: { value: topping } });
+    fireEvent.keyDown(toppingsSelect, { key: 'Enter' });
+  });
+  fireEvent.click(createButton);
 
-
-
+  await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(5));
+  expect.objectContaining({
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: pizzaName, toppings: ['Topping 1', 'Topping 2'] }),
+  });
+});
